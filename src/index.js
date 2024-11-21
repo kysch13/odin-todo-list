@@ -1,3 +1,4 @@
+import "./styles.css";
 import {taskBuilder, groupBuilder} from "./builders.js";
 import { elementTask } from "./dom.js";
 
@@ -24,6 +25,7 @@ const todo = {
 todo.addTask('Hello', 'pending', 'description', '2024-11-19T00:00:00', 'high');
 todo.addTask('Hello2', 'pending', 'description', '2024-11-29T00:00:00', 'high');
 todo.addTask('Hello3', 'pending', 'description', '2025-12-19T00:00:00', 'low');
+todo.addTask('Wash dishes', 'pending', 'wash the pots and pans', '2024-11-20T00:00:00', 'low');
 console.log(todo._tasks);
 todo.deleteTask(1);
 console.log(todo._tasks);
