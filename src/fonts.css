@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "Host Grotesk";
+    src:
+      local("Host Grotesk"),
+      url("./fonts/HostGrotesk-VariableFont_wght.ttf");
+  }
+
+@font-face {
+    font-family: 'Montserrat';
+    src:
+        local('Montserrat'),
+        url('./fonts/Montserrat-VariableFont_wght.ttf');
+}

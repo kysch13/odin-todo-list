@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: "Montserrat", sans-serif;
 }
 
 #page-container {
@@ -19,7 +20,6 @@ body {
 }
 
 .task-container {
-    font-family: 'Poppins', sans-serif;
     background: #ffffff;
     padding: 15px;
     border-radius: 5px;
@@ -28,4 +28,33 @@ body {
 
 .task-container:hover {
     outline: 1px solid #1295ba;
+}
+
+.task-container h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.task-priority {
+    text-transform: uppercase;
+    padding: 4px 13px;
+    border-radius: 50px;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+}
+
+.task-priority.low {
+    background: #ffec83;
+    color: #898300;
+}
+
+.task-priority.medium {
+    background: #ffcb63;
+    color: #896200;
+}
+
+.task-priority.high {
+    background: #f4716c;
+    color: #630c06;
 }
