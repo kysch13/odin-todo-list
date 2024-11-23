@@ -1,3 +1,8 @@
+:root {
+    --delete-red: #c00;
+    --edit-blue: #0492ba;
+}
+
 body {
     margin: 0;
     font-family: "Montserrat", sans-serif;
@@ -23,19 +28,101 @@ body {
     background: #ffffff;
     padding: 15px;
     border-radius: 5px;
-    filter: drop-shadow(1px 1px 1px #eaeaea);
+    filter: drop-shadow(1px 1px 1px #33333344);
+    display: grid;
+    grid-template: 1fr / 40px 2fr 100px;
+    gap: 10px;
 }
 
 .task-container:hover {
     outline: 1px solid #1295ba;
 }
 
+.task-status {
+    display: flex;
+    align-items: center;
+}
+
+.task-status label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    border: 1px solid #777777;
+    position: relative;
+}
+
+.task-status label:hover {
+    border: 1px solid #1295ba;
+    background-color: #ffffff;
+    filter: drop-shadow(0 0 3px #1295ba88);
+}
+
+.task-status input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.task-status input:checked + span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #1295ba;
+    border-radius: 20px;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+}
+
+.task-details {
+    display: flex;
+    flex-direction: column;
+
+}
+
 .task-container h2 {
     margin-top: 0;
     margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.task-desc {
+    margin-bottom: 10px;
+}
+
+
+.task-actions button {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.task-actions button * {
+    pointer-events: none;
+}
+
+.task-actions button svg {
+    width: 30px;
+    height: 30px;
+}
+
+.task-actions .task-delete {
+    color: var(--delete-red);
+}
+
+.task-actions .task-edit {
+    color: var(--edit-blue);
 }
 
 .task-priority {
+    display: none;
     text-transform: uppercase;
     padding: 4px 13px;
     border-radius: 50px;
