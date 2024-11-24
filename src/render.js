@@ -1,5 +1,6 @@
 import { todo } from "./todo";
 import { makeTaskElem } from "./elements";
+import { makeInput } from "./forms";
 
 function clearMain () {
     const main = document.getElementById('main');
@@ -12,6 +13,10 @@ function renderMain () {
         let taskDiv = makeTaskElem(task);
         main.appendChild(taskDiv);
     });
+}
+
+function renderTaskInput () {
+    
 }
 
 export {clearMain, renderMain}

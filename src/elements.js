@@ -5,12 +5,16 @@ import { faSquarePen, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 function makeTaskElem (task) {
     const container = makeElem('div', undefined, 'task-container');
     container.setAttribute('data-task-id', task.idNum);
+    if (task.complete) {
+        container.classList.add('task-completed');
+    }
     const statusCont = makeElem('div', undefined, 'task-status');
     const taskDetails = makeElem('div', undefined, 'task-details');
     const taskUI = makeElem('div', undefined, 'task-ui');
     const detailsChildren = [];
     const uiChildren = [];
-    statusCont.appendChild(makeStatusCheckbox(task.idNum));
+    const statusCheckbox = makeStatusCheckbox(task.idNum, task.complete);
+    statusCont.appendChild(statusCheckbox);
     // Create html elements for task details
     detailsChildren.push(makeElem('h2', task.title, 'task-title'));
     detailsChildren.push(makeElem('span', task.desc, 'task-desc'));
@@ -31,13 +35,17 @@ function makeTaskElem (task) {
     return container;
 }
 
-function makeStatusCheckbox (id) {
+function makeStatusCheckbox (id, complete) {
     const form = makeElem('form');
     const label = makeElem('label');
     const checkbox = makeElem('input');
     const check = makeElem('span');
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('data-task-id', id);
+    checkbox.classList.add('task-status-checkbox');
+    if (complete === true) {
+        checkbox.checked = true;
+    }
     form.appendChild(label);
     label.appendChild(checkbox);
     label.appendChild(check);

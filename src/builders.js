@@ -16,14 +16,14 @@ const groupBuilder = function (title) {
     return {idNum, title};
 }
 
-const taskBuilder = function (title, status, desc, due, priority) {
+const taskBuilder = function (title, complete, desc, due, priority) {
     let idNum = idTracker.taskID();
     title = title;
-    status = status;
+    complete = complete;
     desc = desc;
     due = new Date(due);
     priority = priority;
-   return {idNum, title, status, desc, due, priority};
+   return {idNum, title, complete, desc, due, priority};
 }
 
 export {taskBuilder, groupBuilder};

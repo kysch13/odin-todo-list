@@ -38,6 +38,11 @@ body {
     outline: 1px solid #1295ba;
 }
 
+.task-container.task-completed * {
+    text-decoration: line-through;
+    color: #777;
+}
+
 .task-status {
     display: flex;
     align-items: center;
