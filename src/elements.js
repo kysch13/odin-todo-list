@@ -1,5 +1,5 @@
 import { library, findIconDefinition, icon } from '@fortawesome/fontawesome-svg-core'
-import { faSquarePen, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePen, faSquareXmark, faCircleCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 
 function makeTaskElem (task) {
@@ -40,6 +40,9 @@ function makeStatusCheckbox (id, complete) {
     const label = makeElem('label');
     const checkbox = makeElem('input');
     const check = makeElem('span');
+    // Add FontAwesome icons
+    const checkMark = icon(faCheckCircle);
+    Array.from(checkMark.node).map((n) => check.appendChild(n));
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('data-task-id', id);
     checkbox.classList.add('task-status-checkbox');
