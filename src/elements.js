@@ -85,4 +85,4 @@ function makeElem (type, text, ...classes) {
 }
 
 
-export {makeTaskElem};
+export {makeTaskElem, makeElem};
