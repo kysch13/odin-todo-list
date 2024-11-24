@@ -3,22 +3,19 @@ import "./styles.css";
 import {taskBuilder, groupBuilder} from "./builders.js";
 import {todo} from "./todo.js";
 import { makeTaskElem } from "./elements.js";
-import {clearMain, renderMain} from "./render.js";
+import {clearMain, renderMain, clearForm, renderForm} from "./render.js";
+import { buildTaskForm, submitForm } from "./forms.js";
 
 
-
-
-todo.addTask('Take out garbage', true, 'take out the garbage and recycling', '2024-11-19T00:00:00', 'high');
-todo.addTask('Do a grocery run', false, 'Eggs, milk, bread, butter', '2024-11-29T00:00:00', 'high');
-todo.addTask('Pay hydro bill', false, '$217.78', '2025-12-19T00:00:00', 'medium');
-todo.addTask('Pay internet bill', false, '$72.78', '2025-12-19T00:00:00', 'medium');
-todo.addTask('Medium Task', false, 'description', '2025-12-19T00:00:00', 'medium');
-todo.addTask('Wash dishes', false, 'wash the pots and pans', '2024-11-20T00:00:00', 'low');
-todo.addTask('Call doctor', false, '555-555-5555', '2024-11-20T00:00:00', 'low');
-todo.deleteTask(4);
-todo.addGroup('hello');
+const globalVars = (function (){
+    const main = document.getElementById('main');
+    const sidebar = document.getElementById('sidebar');
+    const formCont = document.getElementById('add-task-form');
+    return {main, sidebar, formCont};
+})();
 
 renderMain();
+renderForm();
 
 main.addEventListener('click', (e) => {
     let elem = e.target;
@@ -38,5 +35,17 @@ main.addEventListener('click', (e) => {
         clearMain();
         renderMain();
     }
+
 });
 
+sidebar.addEventListener('click', (e) => {
+    let elem = e.target;
+    console.log(elem.id);
+    if (elem.id === 'add-new-task-btn') {
+        submitForm();
+        clearMain();
+        renderMain();
+        clearForm();
+        renderForm();
+    }
+})

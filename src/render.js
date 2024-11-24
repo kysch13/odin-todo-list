@@ -1,10 +1,17 @@
 import { todo } from "./todo";
 import { makeTaskElem } from "./elements";
-import { makeInput } from "./forms";
+import { doUntil } from "neo-async";
+import { decodeCodePoint } from "entities/lib/decode.js";
+import { buildTaskForm } from "./forms";
 
 function clearMain () {
     const main = document.getElementById('main');
     main.innerText = '';
+}
+
+function clearForm () {
+    const formCont = document.getElementById('add-task-form');
+    formCont.innerText = '';
 }
 
 function renderMain () {
@@ -15,8 +22,10 @@ function renderMain () {
     });
 }
 
-function renderTaskInput () {
-    
+function renderForm () {
+    const formCont = document.getElementById('add-task-form');
+    formCont.appendChild(buildTaskForm());
 }
 
-export {clearMain, renderMain}
+
+export {clearMain, renderMain, clearForm, renderForm}
