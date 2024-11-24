@@ -67,15 +67,23 @@ function makeInput (type, id, name, value, required, ...classes) {
     return input;
 }
 
-function submitForm () {
+function submitTaskForm () {
     const title = document.getElementById('input-task-title').value;
     const desc = document.getElementById('input-task-desc').value;
     const due = document.getElementById('input-task-due').value;
-    const priority = document.getElementById('input-task-priority').valiue;
-    console.log(title);
-    todo.addTask(String(title), false, String(desc), String(due), String(priority));
+    const priority = document.getElementById('input-task-priority').value;
+    
+    if (validateTaskForm(title)) {
+        todo.addTask(String(title), false, String(desc), String(due), String(priority));
+    }
     
 }
 
+function validateTaskForm (title) {
+    if (title.length > 0) {
+        return true;
+    }
+}
 
-export {buildTaskForm, submitForm};
+
+export {buildTaskForm, submitTaskForm};
