@@ -1,7 +1,5 @@
 import { todo } from "./todo";
 import { makeTaskElem } from "./elements";
-import { doUntil } from "neo-async";
-import { decodeCodePoint } from "entities/lib/decode.js";
 import { buildTaskForm } from "./forms";
 
 function clearMain () {
