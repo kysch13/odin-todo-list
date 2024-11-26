@@ -1,3 +1,5 @@
+import { formatDueDate } from "./dates";
+
 const idTracker = (function () {
     let taskIDTrack = 1;
     let groupIDTrack = 1;
@@ -17,13 +19,15 @@ const groupBuilder = function (title) {
 }
 
 const taskBuilder = function (title, complete, desc, due, priority) {
+    title;
+    complete;
+    desc;
+    priority;
+    due;
     let idNum = idTracker.taskID();
-    title = title;
-    complete = complete;
-    desc = desc;
-    due = new Date(due);
-    priority = priority;
    return {idNum, title, complete, desc, due, priority};
 }
+
+
 
 export {taskBuilder, groupBuilder};

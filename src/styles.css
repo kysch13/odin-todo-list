@@ -196,3 +196,18 @@ body {
     background: #f4716c;
     color: #630c06;
 }
+
+.task-overdue {
+    color: #0f80c4;
+    font-weight: 600;
+}
+
+.task-due-today {
+    color: #c00;
+    font-weight: 600;
+}
+
+.task-due-soon {
+    color: rgb(233, 120, 0);
+    font-weight: 600;
+}

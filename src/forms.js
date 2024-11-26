@@ -1,5 +1,7 @@
 import { makeElem } from "./elements";
 import { todo } from "./todo";
+import { format } from "date-fns";
+import { dates } from "./dates";
 
 function buildTaskForm () {
     const form = makeElem('form', undefined, 'add-task-form');
@@ -18,7 +20,9 @@ function buildTaskForm () {
 
     const due = makeElem('div');
     due.appendChild(makeLabel('due', 'Due Date'));
-    due.appendChild(makeInput('date', 'input-task-due', 'due', null, false));
+    const dueDateInput = makeInput('date', 'input-task-due', 'due', null, false);
+    dueDateInput.value = dates.currentDateFormatted;
+    due.appendChild(dueDateInput);
     inputs.push(due);
 
     const priority = makeElem('div');
@@ -72,9 +76,10 @@ function submitTaskForm () {
     const desc = document.getElementById('input-task-desc').value;
     const due = document.getElementById('input-task-due').value;
     const priority = document.getElementById('input-task-priority').value;
-    
+    // Convert date input to date object. Format it later on output.
+    const dueDateObj = new Date(`${due}T00:00:00`);
     if (validateTaskForm(title)) {
-        todo.addTask(String(title), false, String(desc), String(due), String(priority));
+        todo.addTask(String(title), false, String(desc), dueDateObj, String(priority));
     }
     
 }

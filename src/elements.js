@@ -1,5 +1,6 @@
 import { library, findIconDefinition, icon } from '@fortawesome/fontawesome-svg-core'
 import { faSquarePen, faSquareXmark, faCircleCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { formatDueDate, dateColorClass } from './dates';
 
 
 function makeTaskElem (task) {
@@ -18,7 +19,7 @@ function makeTaskElem (task) {
     // Create html elements for task details
     detailsChildren.push(makeElem('h2', task.title, 'task-title'));
     detailsChildren.push(makeElem('span', task.desc, 'task-desc'));
-    detailsChildren.push(makeElem('span', task.due, 'task-due'));
+    detailsChildren.push(makeElem('span', formatDueDate(task.due), 'task-due', dateColorClass(task.due)));
     uiChildren.push(makeElem('span', task.priority, 'task-priority', task.priority));
     uiChildren.push(makeTaskActionsElem(task.idNum));
 
