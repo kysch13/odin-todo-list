@@ -24,6 +24,7 @@
     "commander": "^2.20.3",
     "css-loader": "^7.1.2",
     "cssesc": "^3.0.0",
+    "date-fns": "^4.1.0",
     "dot-case": "^3.0.4",
     "electron-to-chromium": "^1.5.62",
     "enhanced-resolve": "^5.17.1",
