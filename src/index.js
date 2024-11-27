@@ -1,8 +1,8 @@
 import "./fonts.css";
 import "./styles.css";
 import {todo} from "./todo.js";
-import {clearMain, renderMain, clearForm, renderForm} from "./render.js";
-import { submitTaskForm} from "./forms.js";
+import {groupForm, groupList, taskList, taskForm} from "./render.js";
+import { submitGroupForm, submitTaskForm} from "./forms.js";
 
 
 const globalVars = (function (){
@@ -12,15 +12,16 @@ const globalVars = (function (){
     return {main, sidebar, formCont};
 })();
 
-renderMain();
-renderForm();
+taskList.render();
+taskForm.render();
+groupForm.render();
 
 main.addEventListener('click', (e) => {
     let elem = e.target;
     if (elem.classList.contains('task-delete')){
         todo.deleteTask(Number(elem.dataset.taskId));
-        clearMain();
-        renderMain();
+        taskForm.clear();
+        taskForm.render();
     }
 
     if (elem.classList.contains('task-status-checkbox')){
@@ -29,8 +30,8 @@ main.addEventListener('click', (e) => {
         } else {
             todo.changeTaskStatus(Number(elem.dataset.taskId), false);
         }
-        clearMain();
-        renderMain();
+        taskList.clear();
+        taskList.render();
     }
 
 });
@@ -39,9 +40,17 @@ sidebar.addEventListener('click', (e) => {
     let elem = e.target;
     if (elem.id === 'add-new-task-btn') {
         submitTaskForm();
-        clearMain();
-        renderMain();
-        clearForm();
-        renderForm();
+        taskList.clear();
+        taskList.render();
+        taskForm.clear();
+        taskForm.render();
+    }
+    if (elem.id === 'add-new-group-btn') {
+        submitGroupForm();
+        groupList.clear();
+        groupList.render();
+        groupForm.clear();
+        groupForm.render();
+        console.log(todo._groups);
     }
 })
