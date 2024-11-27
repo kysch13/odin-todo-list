@@ -1,7 +1,8 @@
 import { makeElem } from "./elements";
 import { todo } from "./todo";
-import { format } from "date-fns";
 import { dates } from "./dates";
+
+
 
 function buildTaskForm () {
     const form = makeElem('form', undefined, 'add-task-form');
@@ -44,6 +45,24 @@ function buildTaskForm () {
     return form;
 }
 
+function buildGroupForm () {
+    const form = makeElem('form', undefined, 'add-group-form');
+    const fieldset = makeElem('fieldset', undefined);
+    
+    const title = makeElem('div');
+    title.appendChild(makeLabel('title', 'Group'));
+    title.appendChild(makeInput('text', 'input-group-title', 'title', null, true));
+
+    const submit = makeElem('button', 'Add Group', 'add-group-submit-btn');
+    submit.type = 'button';
+    submit.id = 'add-new-group-btn';
+
+    fieldset.appendChild(title);
+    fieldset.appendChild(submit);
+    form.appendChild(fieldset);
+    return form;
+}
+
 function makeLabel (labelFor, text) {
     const label = document.createElement('label');
     label.setAttribute('for', labelFor);
@@ -78,17 +97,24 @@ function submitTaskForm () {
     const priority = document.getElementById('input-task-priority').value;
     // Convert date input to date object. Format it later on output.
     const dueDateObj = new Date(`${due}T00:00:00`);
-    if (validateTaskForm(title)) {
+    if (validateForm(title)) {
         todo.addTask(String(title), false, String(desc), dueDateObj, String(priority));
     }
     
 }
 
-function validateTaskForm (title) {
+function submitGroupForm () {
+    const title = document.getElementById('input-group-title').value;
+    if (validateForm(title)) {
+        todo.addGroup(String(title));
+    }
+}
+
+function validateForm (title) {
     if (title.length > 0) {
         return true;
     }
 }
 
 
-export {buildTaskForm, submitTaskForm};
+export {buildTaskForm, submitTaskForm, buildGroupForm, submitGroupForm};

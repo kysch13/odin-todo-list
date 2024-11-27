@@ -86,4 +86,10 @@ function makeElem (type, text, ...classes) {
 }
 
 
-export {makeTaskElem, makeElem};
+function makeGroupListItem (group) {
+    const li = makeElem('li', group.title);
+    li.setAttribute('data-group-id', group.idNum);
+    return li;
+}
+
+export {makeTaskElem, makeElem, makeGroupListItem};
