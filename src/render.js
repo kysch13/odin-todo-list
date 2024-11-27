@@ -1,29 +1,53 @@
 import { todo } from "./todo";
-import { makeTaskElem } from "./elements";
-import { buildTaskForm } from "./forms";
+import { makeTaskElem, makeGroupListItem } from "./elements";
+import { buildTaskForm, buildGroupForm } from "./forms";
 
-function clearMain () {
-    const main = document.getElementById('main');
-    main.innerText = '';
+
+const taskList = {
+    main: document.getElementById('main'),
+    render: function () {
+        todo._tasks.forEach(task => {
+            let taskDiv = makeTaskElem(task);
+            this.main.appendChild(taskDiv);
+        });
+    },
+    clear: function () {
+        this.main.innerText = '';
+    }
 }
 
-function clearForm () {
-    const formCont = document.getElementById('add-task-form');
-    formCont.innerText = '';
+const taskForm = {
+    container: document.getElementById('add-task-form'),
+    render: function () {
+        this.container.appendChild(buildTaskForm());
+    },
+    clear: function () {
+        this.container.innerText = '';
+    }
 }
 
-function renderMain () {
-    const main = document.getElementById('main');
-    todo._tasks.forEach(task => {
-        let taskDiv = makeTaskElem(task);
-        main.appendChild(taskDiv);
-    });
+const groupForm = {
+    container: document.getElementById('add-group-form'),
+    render: function () {
+        this.container.appendChild(buildGroupForm());
+    },
+    clear: function () {
+        this.container.innerText = '';
+    }
 }
 
-function renderForm () {
-    const formCont = document.getElementById('add-task-form');
-    formCont.appendChild(buildTaskForm());
+const groupList = {
+    list: document.getElementById('group-list'),
+    render: function () {
+        todo._groups.forEach(group => {
+            let groupListItem = makeGroupListItem(group);
+            this.list.appendChild(groupListItem);
+        });
+    },
+    clear: function () {
+        this.list.innerText = '';
+    }
 }
 
 
-export {clearMain, renderMain, clearForm, renderForm}
+export {taskList, taskForm, groupForm, groupList}
