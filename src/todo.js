@@ -7,9 +7,9 @@ const todo = {
         let idNum = idTracker.groupID();
         this._groups.push({idNum, title});
     },
-    addTask: function (title, complete, desc, due, priority) {
+    addTask: function (title, complete, desc, due, priority, group) {
         let idNum = idTracker.taskID();
-        this._tasks.push({idNum, title, complete, desc, priority, due});
+        this._tasks.push({idNum, title, complete, desc, due, priority, group});
     },
     deleteTask: function (idNum) {
         // find task with matching id and remove from list
