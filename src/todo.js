@@ -1,13 +1,15 @@
-import { taskBuilder, groupBuilder } from "./builders";
+import { idTracker } from "./id-tracker";
 
 const todo = {
     _groups: [],
     _tasks: [],
     addGroup: function (title) {
-        this._groups.push(groupBuilder(title));
+        let idNum = idTracker.groupID();
+        this._groups.push({idNum, title});
     },
     addTask: function (title, complete, desc, due, priority) {
-        this._tasks.push(taskBuilder(title, complete, desc, due, priority));
+        let idNum = idTracker.taskID();
+        this._tasks.push({idNum, title, complete, desc, priority, due});
     },
     deleteTask: function (idNum) {
         // find task with matching id and remove from list
