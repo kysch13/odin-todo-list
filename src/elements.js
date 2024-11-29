@@ -92,4 +92,9 @@ function makeGroupListItem (group) {
     return li;
 }
 
-export {makeTaskElem, makeElem, makeGroupListItem};
+function makeGroupTitleElem (activeGroup) {
+    const title = makeElem('h1', activeGroup.title);
+    return title;
+}
+
+export {makeTaskElem, makeElem, makeGroupListItem, makeGroupTitleElem};

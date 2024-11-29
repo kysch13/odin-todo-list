@@ -20,8 +20,8 @@ main.addEventListener('click', (e) => {
     let elem = e.target;
     if (elem.classList.contains('task-delete')){
         todo.deleteTask(Number(elem.dataset.taskId));
-        taskForm.clear();
-        taskForm.render();
+        taskList.clear();
+        taskList.render();
     }
 
     if (elem.classList.contains('task-status-checkbox')){
@@ -47,6 +47,8 @@ sidebar.addEventListener('click', (e) => {
     }
     if (elem.id === 'add-new-group-btn') {
         submitGroupForm();
+        taskList.clear();
+        taskList.render();
         groupList.clear();
         groupList.render();
         groupForm.clear();
@@ -54,6 +56,15 @@ sidebar.addEventListener('click', (e) => {
     }
     if (elem.classList.contains('group-list-item')) {
         todo.setActiveGroup(Number(elem.dataset.groupId));
+        taskList.clear();
+        taskList.render();
+        groupList.clear();
+        groupList.render();
+    }
+    if (elem.id === 'all-tasks') {
+        todo.setActiveGroup(0);
+        taskList.clear();
+        taskList.render();
         groupList.clear();
         groupList.render();
     }

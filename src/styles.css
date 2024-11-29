@@ -211,3 +211,12 @@ body {
     color: rgb(233, 120, 0);
     font-weight: 600;
 }
+
+#group-list {
+    padding: 0;
+    list-style: none;
+}
+
+#group-list .active-group {
+    background-color: #bcbcbc;
+}
