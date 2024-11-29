@@ -2,10 +2,15 @@ import { idTracker } from "./id-tracker";
 
 const todo = {
     _groups: [],
+    _activeGroup: 0,
     _tasks: [],
     addGroup: function (title) {
         let idNum = idTracker.groupID();
         this._groups.push({idNum, title});
+        this.setActiveGroup(idNum);
+    },
+    setActiveGroup: function (idNum) {
+        this._activeGroup = idNum;
     },
     addTask: function (title, complete, desc, due, priority, group) {
         let idNum = idTracker.taskID();

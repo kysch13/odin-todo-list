@@ -98,9 +98,8 @@ function submitTaskForm () {
     // Convert date input to date object. Format it later on output.
     const dueDateObj = new Date(`${due}T00:00:00`);
     if (validateForm(title)) {
-        todo.addTask(String(title), false, String(desc), dueDateObj, String(priority));
+        todo.addTask(String(title), false, String(desc), dueDateObj, String(priority), todo._activeGroup);
     }
-    
 }
 
 function submitGroupForm () {

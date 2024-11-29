@@ -41,6 +41,10 @@ const groupList = {
     render: function () {
         todo._groups.forEach(group => {
             let groupListItem = makeGroupListItem(group);
+            groupListItem.classList.add('group-list-item');
+            if (group.idNum === todo._activeGroup) {
+                groupListItem.classList.add('active-group');
+            };
             this.list.appendChild(groupListItem);
         });
     },

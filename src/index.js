@@ -51,6 +51,10 @@ sidebar.addEventListener('click', (e) => {
         groupList.render();
         groupForm.clear();
         groupForm.render();
-        console.log(todo._groups);
+    }
+    if (elem.classList.contains('group-list-item')) {
+        todo.setActiveGroup(Number(elem.dataset.groupId));
+        groupList.clear();
+        groupList.render();
     }
 })
