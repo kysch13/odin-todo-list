@@ -1,6 +1,7 @@
 import { makeElem } from "./elements";
 import { todo } from "./todo";
 import { dates } from "./dates";
+import { taskList, taskForm, groupList, groupForm } from "./render";
 
 
 
@@ -38,6 +39,15 @@ function buildTaskForm () {
 
     inputs.forEach(el => {
         fieldset.appendChild(el);
+        el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                submitTaskForm();
+                taskList.clear();
+                taskList.render();
+                taskForm.clear();
+                taskForm.render();
+            }
+        })
     });
 
     form.appendChild(fieldset);
@@ -51,13 +61,33 @@ function buildGroupForm () {
     
     const title = makeElem('div');
     title.appendChild(makeLabel('title', 'Group'));
-    title.appendChild(makeInput('text', 'input-group-title', 'title', null, true));
+    const titleInput = makeInput('text', 'input-group-title', 'title', null, true);
+    title.appendChild(titleInput);
+    titleInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            submitGroupForm();
+            taskList.clear();
+            taskList.render();
+            groupList.clear();
+            groupList.render();
+            groupForm.clear();
+            groupForm.render();
+        }
+    })
+
+    // disabled button to prevent input from submitting form on keypress enter
+    const dummySubmit = makeElem('button', '');
+    dummySubmit.type = 'button';
+    dummySubmit.disabled = true;
+    dummySubmit.style.display = 'none';
+
 
     const submit = makeElem('button', 'Add Group', 'add-group-submit-btn');
     submit.type = 'button';
     submit.id = 'add-new-group-btn';
 
     fieldset.appendChild(title);
+    fieldset.appendChild(dummySubmit);
     fieldset.appendChild(submit);
     form.appendChild(fieldset);
     return form;
