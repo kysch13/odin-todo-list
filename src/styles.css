@@ -35,6 +35,7 @@ body {
     display: none;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(4px);
 }
 
 #add-task-form.active {
@@ -154,6 +155,20 @@ label[for="input-task-priority"] input:checked + span:before {
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 18px;
+}
+
+#add-task-close.close-btn {
+    background: none;
+    color: #777777;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+#add-task-close.close-btn svg {
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
 }
 
 #main-header {

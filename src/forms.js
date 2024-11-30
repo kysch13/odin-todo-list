@@ -2,6 +2,9 @@ import { makeElem } from "./elements";
 import { todo } from "./todo";
 import { dates, formatSimpleDate } from "./dates";
 import { taskList, taskForm, groupList, groupForm } from "./render";
+import { icon } from '@fortawesome/fontawesome-svg-core'
+import { faSquarePen, faCircleXmark, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -60,6 +63,7 @@ function buildTaskForm (action, id) {
     }
 
     fieldset.appendChild(legend);
+    
 
     inputs.forEach(el => {
         fieldset.appendChild(el);
@@ -74,7 +78,17 @@ function buildTaskForm (action, id) {
         })
     });
 
+    
     form.appendChild(fieldset);
+
+
+    const closeBtn = makeElem('button', '', 'close-btn');
+    closeBtn.type = 'button';
+    closeBtn.id = 'add-task-close';
+    // Add FontAwesome icons
+    const closeIcon = icon(faCircleXmark);
+    Array.from(closeIcon.node).map((n) => closeBtn.appendChild(n));
+    form.appendChild(closeBtn);
 
     return form;
 }

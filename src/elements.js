@@ -1,5 +1,5 @@
-import { library, findIconDefinition, icon } from '@fortawesome/fontawesome-svg-core'
-import { faSquarePen, faSquareXmark, faCircleCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { icon } from '@fortawesome/fontawesome-svg-core'
+import { faSquarePen, faSquareXmark, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { formatDueDate, dateColorClass } from './dates';
 
 
