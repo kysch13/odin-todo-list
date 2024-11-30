@@ -5,8 +5,9 @@ import { buildTaskForm, buildGroupForm } from "./forms";
 
 const taskList = {
     main: document.getElementById('main'),
+    title: document.getElementById('main-title'),
     render: function () {
-        this.main.appendChild(makeGroupTitleElem(todo._activeGroup));
+        this.title.appendChild(makeGroupTitleElem(todo._activeGroup));
         todo._tasks.forEach(task => {
             if (task.group === todo._activeGroup.idNum || todo._activeGroup.idNum === 0) {
                 let taskDiv = makeTaskElem(task);
@@ -17,6 +18,7 @@ const taskList = {
     },
     clear: function () {
         this.main.innerText = '';
+        this.title.innerText = '';
     }
 }
 

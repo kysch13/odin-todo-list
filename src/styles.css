@@ -156,6 +156,32 @@ label[for="input-task-priority"] input:checked + span:before {
     font-size: 18px;
 }
 
+#main-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background: #efefef;
+}
+
+#main-header h1 {
+    margin: 0;
+}
+
+#main-header #add-new-task {
+    background: var(--btn-primary-bg);
+    padding: 10px 50px;
+    border: none;
+    border-radius: 100px;
+    color: var(--btn-primary-text);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#main-title {
+    display: flex;
+    align-items: center;
+}
+
 #main {
     padding: 20px;
     background-color: var(--main-bg);
