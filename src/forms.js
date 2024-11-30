@@ -12,28 +12,31 @@ function buildTaskForm (action, id) {
 
     const inputs = [];
     const title = makeElem('div');
-    title.appendChild(makeLabel('title', 'Task'));
+    title.appendChild(makeLabel('input-task-title', 'Task'));
     const titleInput = makeInput('text', 'input-task-title', 'title', null, true);
     title.appendChild(titleInput);
     inputs.push(title);
 
     const desc = makeElem('div');
-    desc.appendChild(makeLabel('desc', 'Task Details'));
+    desc.appendChild(makeLabel('input-task-desc', 'Task Details'));
     const descInput = makeInput('text', 'input-task-desc', 'desc', null, false);
     desc.appendChild(descInput);
     inputs.push(desc);
 
     const due = makeElem('div');
-    due.appendChild(makeLabel('due', 'Due Date'));
+    due.appendChild(makeLabel('input-task-due', 'Due Date'));
     const dueDateInput = makeInput('date', 'input-task-due', 'due', null, false);
     dueDateInput.value = dates.currentDateFormatted;
     due.appendChild(dueDateInput);
     inputs.push(due);
 
-    const priority = makeElem('div');
-    priority.appendChild(makeLabel('checkbox', 'High Priority'));
+    const priority = makeElem('div', undefined, 'task-priority-container');
+    const priorityLabel = makeLabel('input-task-priority', '');
+    priority.appendChild(priorityLabel);
+    const prioritySpan = makeElem('span', undefined);
     const priorityInput = makeInput('checkbox', 'input-task-priority', 'priority', null, false);
-    priority.appendChild(priorityInput);
+    priorityLabel.appendChild(priorityInput);
+    priorityLabel.appendChild(prioritySpan);
     inputs.push(priority);
 
     if (action === 'add') {
