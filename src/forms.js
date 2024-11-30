@@ -8,6 +8,7 @@ import { taskList, taskForm, groupList, groupForm } from "./render";
 function buildTaskForm (action, id) {
     const form = makeElem('form', undefined, 'add-task-form');
     const fieldset = makeElem('fieldset', undefined);
+    const legend = makeElem('legend', undefined);
 
     const inputs = [];
     const title = makeElem('div');
@@ -40,6 +41,7 @@ function buildTaskForm (action, id) {
         submit.type = 'button';
         submit.id = 'add-new-task-btn';
         inputs.push(submit);
+        legend.innerText = 'Add a Task';
     } else if (action === 'edit' && (id)) {
         const submit = makeElem('button', 'Save Task', 'save-task-submit-btn');
         submit.type = 'button';
@@ -51,9 +53,10 @@ function buildTaskForm (action, id) {
         descInput.value = taskObj.desc;
         dueDateInput.value = formatSimpleDate(taskObj.due); 
         priorityInput.checked = taskObj.priority;
+        legend.innerText = 'Edit Task';
     }
 
-    
+    fieldset.appendChild(legend);
 
     inputs.forEach(el => {
         fieldset.appendChild(el);
