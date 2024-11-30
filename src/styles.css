@@ -1,6 +1,8 @@
 :root {
     --delete-red: #c00;
     --edit-blue: #0492ba;
+    --btn-primary-bg: #0082e1;
+    --btn-primary-text: #ffffff;
     --sidebar-bg: #eaeaea;
     --main-bg: #ffffff;
 }
@@ -22,25 +24,55 @@ body {
     overflow: scroll;
 }
 
+#add-task-form {
+    position: absolute;
+    z-index: 9999;
+    background: #05285ecf;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .add-task-form {
     padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    filter: drop-shadow(1px 1px 3px #0007);
 }
 
 .add-task-form fieldset{
+    border: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 20px;
+    gap: 15px;
 }
 
 .add-task-form input {
-    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #bcbcbc;
+    width: clamp(200px, 500px, 95vw);
 }
 
 
 
 .add-task-form label {
     display: block;
+    margin-bottom: 5px;
+}
+
+.add-task-form button {
+    cursor: pointer;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
 }
 
 #main {
