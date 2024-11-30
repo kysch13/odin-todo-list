@@ -30,6 +30,12 @@ const taskForm = {
     },
     clear: function () {
         this.container.innerText = '';
+    },
+    show: function () {
+        this.container.classList.add('active');
+    },
+    hide: function () {
+        this.container.classList.remove('active');
     }
 }
 
