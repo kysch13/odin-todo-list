@@ -8,6 +8,7 @@ const taskList = {
     title: document.getElementById('main-title'),
     render: function () {
         this.title.appendChild(makeGroupTitleElem(todo._activeGroup));
+        taskForm.hide();
         todo._tasks.forEach(task => {
             if (task.group === todo._activeGroup.idNum || todo._activeGroup.idNum === 0) {
                 let taskDiv = makeTaskElem(task);

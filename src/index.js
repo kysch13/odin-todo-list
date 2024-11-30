@@ -5,18 +5,21 @@ import {groupForm, groupList, taskList, taskForm} from "./render.js";
 import { submitGroupForm, submitTaskEdit, submitTaskForm} from "./forms.js";
 
 
-const globalVars = (function (){
+const pageElements = (function (){
     const main = document.getElementById('main');
+    const mainHeader = document.getElementById('main-header');
     const sidebar = document.getElementById('sidebar');
     const formCont = document.getElementById('add-task-form');
-    return {main, sidebar, formCont};
+    return {main, mainHeader, sidebar, formCont};
 })();
+
+
 
 taskList.render();
 taskForm.render();
 groupForm.render();
 
-main.addEventListener('click', (e) => {
+pageElements.main.addEventListener('click', (e) => {
     let elem = e.target;
     if (elem.classList.contains('task-delete')){
         todo.deleteTask(Number(elem.dataset.taskId));
@@ -27,6 +30,7 @@ main.addEventListener('click', (e) => {
     if (elem.classList.contains('task-edit')){
         taskForm.clear();
         taskForm.edit(Number(elem.dataset.taskId));
+        taskForm.show();
     }
 
     if (elem.classList.contains('task-status-checkbox')){
@@ -41,7 +45,7 @@ main.addEventListener('click', (e) => {
 
 });
 
-sidebar.addEventListener('click', (e) => {
+pageElements.sidebar.addEventListener('click', (e) => {
     let elem = e.target;
     if (elem.id === 'add-new-task-btn') {
         submitTaskForm();
@@ -80,6 +84,13 @@ sidebar.addEventListener('click', (e) => {
         groupList.clear();
         groupList.render();
     }
-})
+});
+
+
+pageElements.mainHeader.addEventListener('click', (e) => {
+    if (e.target.id === 'add-new-task'){
+        taskForm.show();
+    }
+});
 
 
