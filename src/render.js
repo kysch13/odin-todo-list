@@ -23,7 +23,10 @@ const taskList = {
 const taskForm = {
     container: document.getElementById('add-task-form'),
     render: function () {
-        this.container.appendChild(buildTaskForm());
+        this.container.appendChild(buildTaskForm('add'));
+    },
+    edit: function (idNum) {
+        this.container.appendChild(buildTaskForm('edit', idNum))
     },
     clear: function () {
         this.container.innerText = '';

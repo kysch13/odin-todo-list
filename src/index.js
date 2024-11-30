@@ -2,7 +2,7 @@ import "./fonts.css";
 import "./styles.css";
 import {todo} from "./todo.js";
 import {groupForm, groupList, taskList, taskForm} from "./render.js";
-import { submitGroupForm, submitTaskForm} from "./forms.js";
+import { submitGroupForm, submitTaskEdit, submitTaskForm} from "./forms.js";
 
 
 const globalVars = (function (){
@@ -24,6 +24,11 @@ main.addEventListener('click', (e) => {
         taskList.render();
     }
 
+    if (elem.classList.contains('task-edit')){
+        taskForm.clear();
+        taskForm.edit(Number(elem.dataset.taskId));
+    }
+
     if (elem.classList.contains('task-status-checkbox')){
         if (elem.checked === true) {
             todo.changeTaskStatus(Number(elem.dataset.taskId), true);
@@ -40,6 +45,13 @@ sidebar.addEventListener('click', (e) => {
     let elem = e.target;
     if (elem.id === 'add-new-task-btn') {
         submitTaskForm();
+        taskList.clear();
+        taskList.render();
+        taskForm.clear();
+        taskForm.render();
+    }
+    if (elem.id === 'save-task-btn') {
+        submitTaskEdit(Number(elem.dataset.taskId));
         taskList.clear();
         taskList.render();
         taskForm.clear();

@@ -1,23 +1,25 @@
 import { makeElem } from "./elements";
 import { todo } from "./todo";
-import { dates } from "./dates";
+import { dates, formatSimpleDate } from "./dates";
 import { taskList, taskForm, groupList, groupForm } from "./render";
 
 
 
-function buildTaskForm () {
+function buildTaskForm (action, id) {
     const form = makeElem('form', undefined, 'add-task-form');
     const fieldset = makeElem('fieldset', undefined);
 
     const inputs = [];
     const title = makeElem('div');
     title.appendChild(makeLabel('title', 'Task'));
-    title.appendChild(makeInput('text', 'input-task-title', 'title', null, true));
+    const titleInput = makeInput('text', 'input-task-title', 'title', null, true);
+    title.appendChild(titleInput);
     inputs.push(title);
 
     const desc = makeElem('div');
     desc.appendChild(makeLabel('desc', 'Task Details'));
-    desc.appendChild(makeInput('text', 'input-task-desc', 'desc', null, false));
+    const descInput = makeInput('text', 'input-task-desc', 'desc', null, false);
+    desc.appendChild(descInput);
     inputs.push(desc);
 
     const due = makeElem('div');
@@ -29,13 +31,29 @@ function buildTaskForm () {
 
     const priority = makeElem('div');
     priority.appendChild(makeLabel('checkbox', 'High Priority'));
-    priority.appendChild(makeInput('checkbox', 'input-task-priority', 'priority', null, false));
+    const priorityInput = makeInput('checkbox', 'input-task-priority', 'priority', null, false);
+    priority.appendChild(priorityInput);
     inputs.push(priority);
 
-    const submit = makeElem('button', 'Add Task', 'add-task-submit-btn');
-    submit.type = 'button';
-    submit.id = 'add-new-task-btn';
-    inputs.push(submit);
+    if (action === 'add') {
+        const submit = makeElem('button', 'Add Task', 'add-task-submit-btn');
+        submit.type = 'button';
+        submit.id = 'add-new-task-btn';
+        inputs.push(submit);
+    } else if (action === 'edit' && (id)) {
+        const submit = makeElem('button', 'Save Task', 'save-task-submit-btn');
+        submit.type = 'button';
+        submit.id = 'save-task-btn';
+        submit.dataset.taskId = id;
+        inputs.push(submit);
+        const taskObj = todo.retrieveTask(id);
+        titleInput.value = taskObj.title;
+        descInput.value = taskObj.desc;
+        dueDateInput.value = formatSimpleDate(taskObj.due); 
+        priorityInput.checked = taskObj.priority;
+    }
+
+    
 
     inputs.forEach(el => {
         fieldset.appendChild(el);
@@ -124,11 +142,23 @@ function submitTaskForm () {
     const title = document.getElementById('input-task-title').value;
     const desc = document.getElementById('input-task-desc').value;
     const due = document.getElementById('input-task-due').value;
-    const priority = document.getElementById('input-task-priority').value;
+    const priority = document.getElementById('input-task-priority').checked;
     // Convert date input to date object. Format it later on output.
     const dueDateObj = new Date(`${due}T00:00:00`);
     if (validateForm(title)) {
-        todo.addTask(String(title), false, String(desc), dueDateObj, String(priority), todo._activeGroup.idNum);
+        todo.addTask(String(title), false, String(desc), dueDateObj, priority, todo._activeGroup.idNum);
+    }
+}
+
+function submitTaskEdit (idNum) {
+    const title = document.getElementById('input-task-title').value;
+    const desc = document.getElementById('input-task-desc').value;
+    const due = document.getElementById('input-task-due').value;
+    const priority = document.getElementById('input-task-priority').checked;
+    // Convert date input to date object. Format it later on output.
+    const dueDateObj = new Date(`${due}T00:00:00`);
+    if (validateForm(title)) {
+        todo.updateTask(idNum, String(title), false, String(desc), dueDateObj, priority);
     }
 }
 
@@ -146,4 +176,4 @@ function validateForm (title) {
 }
 
 
-export {buildTaskForm, submitTaskForm, buildGroupForm, submitGroupForm};
+export {buildTaskForm, submitTaskForm, submitTaskEdit, buildGroupForm, submitGroupForm};

@@ -9,6 +9,11 @@ const dates = (function (){
     return { currentDate, currentDateFormatted };
 })();
 
+function formatSimpleDate (due) {
+    const dateObj = due;
+    return format(dateObj, 'yyyy-MM-dd');
+}
+
 function formatDueDate (due) {
     const daysLeft = differenceInDays(
         due,
@@ -43,5 +48,5 @@ function dateColorClass (due) {
     }
 }
 
-export {dates, formatDueDate, dateColorClass};
+export {dates, formatDueDate, dateColorClass, formatSimpleDate};
 

@@ -33,6 +33,25 @@ const todo = {
             }
         }
     },
+    updateTask: function (idNum, title, complete, desc, due, priority) {
+        // find task with matching id and update key values
+        for (let i=0; i<this._tasks.length; i++) {
+            if (this._tasks[i].idNum === idNum) {
+                this._tasks[i].title = title;
+                this._tasks[i].complete = complete;
+                this._tasks[i].desc = desc;
+                this._tasks[i].due = due;
+                this._tasks[i].priority = priority;
+            }
+        }
+    },
+    retrieveTask: function (idNum) {
+        for (let i=0; i<this._tasks.length; i++) {
+            if (this._tasks[i].idNum === idNum) {
+                return this._tasks[i];
+            }
+        }
+    },
     changeTaskStatus: function (idNum, complete) {
         for (let i=0; i<this._tasks.length; i++) {
             if (this._tasks[i].idNum === idNum) {
