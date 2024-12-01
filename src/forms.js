@@ -73,7 +73,6 @@ function buildTaskForm (action, id) {
                 taskList.clear();
                 taskList.render();
                 taskForm.clear();
-                taskForm.render();
             }
         })
     });
