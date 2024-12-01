@@ -111,7 +111,6 @@ function buildGroupForm () {
             groupList.clear();
             groupList.render();
             groupForm.clear();
-            groupForm.render();
         }
     })
 
