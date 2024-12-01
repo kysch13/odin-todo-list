@@ -47,7 +47,7 @@ function buildTaskForm (action, id) {
         submit.type = 'button';
         submit.id = 'add-new-task-btn';
         inputs.push(submit);
-        legend.innerText = 'Add a Task';
+        legend.innerText = 'Add a New Task';
     } else if (action === 'edit' && (id)) {
         const submit = makeElem('button', 'Save Task', 'save-task-submit-btn');
         submit.type = 'button';
@@ -96,9 +96,11 @@ function buildTaskForm (action, id) {
 function buildGroupForm () {
     const form = makeElem('form', undefined, 'add-group-form');
     const fieldset = makeElem('fieldset', undefined);
-    
+    const legend = makeElem('legend', 'Add a New List');
+    fieldset.appendChild(legend);
+
     const title = makeElem('div');
-    title.appendChild(makeLabel('title', 'Group'));
+    title.appendChild(makeLabel('title', 'List Name'));
     const titleInput = makeInput('text', 'input-group-title', 'title', null, true);
     title.appendChild(titleInput);
     titleInput.addEventListener('keydown', (e) => {
@@ -128,6 +130,15 @@ function buildGroupForm () {
     fieldset.appendChild(dummySubmit);
     fieldset.appendChild(submit);
     form.appendChild(fieldset);
+
+    const closeBtn = makeElem('button', '', 'close-btn');
+    closeBtn.type = 'button';
+    closeBtn.id = 'add-group-close';
+    // Add FontAwesome icons
+    const closeIcon = icon(faCircleXmark);
+    Array.from(closeIcon.node).map((n) => closeBtn.appendChild(n));
+    form.appendChild(closeBtn);
+
     return form;
 }
 

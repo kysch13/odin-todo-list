@@ -1,5 +1,5 @@
 import { icon } from '@fortawesome/fontawesome-svg-core'
-import { faSquarePen, faSquareXmark, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePen, faSquareXmark, faCheckCircle, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { formatDueDate, dateColorClass } from './dates';
 
 
@@ -97,4 +97,15 @@ function makeGroupTitleElem (activeGroup) {
     return title;
 }
 
-export {makeTaskElem, makeElem, makeGroupListItem, makeGroupTitleElem};
+function makeAddButton (id, text) {
+    const button = makeElem('button', text);
+    button.id = id;
+    button.type = 'button';
+    // Add FontAwesome Icon
+    const plusIcon = icon(faCirclePlus);
+    Array.from(plusIcon.node).map((n) => button.appendChild(n));
+    return button;
+}
+
+
+export {makeTaskElem, makeElem, makeGroupListItem, makeGroupTitleElem, makeAddButton};

@@ -1,13 +1,22 @@
 import { todo } from "./todo";
-import { makeTaskElem, makeGroupListItem, makeGroupTitleElem } from "./elements";
+import { makeTaskElem, makeGroupListItem, makeGroupTitleElem, makeElem, makeAddButton } from "./elements";
 import { buildTaskForm, buildGroupForm } from "./forms";
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import { faInbox } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const taskList = {
     main: document.getElementById('main'),
     title: document.getElementById('main-title'),
     render: function () {
-        this.title.appendChild(makeGroupTitleElem(todo._activeGroup));
+        // If group is all tasks, add inbox icon
+        if (todo._activeGroup.idNum === 0) {
+            const inboxIcon = icon(faInbox);
+            Array.from(inboxIcon.node).map((n) => this.title.appendChild(n));
+        }
+        const mainTitle = makeGroupTitleElem(todo._activeGroup);
+        this.title.appendChild(mainTitle);
         taskForm.hide();
         todo._tasks.forEach(task => {
             if (task.group === todo._activeGroup.idNum || todo._activeGroup.idNum === 0) {
@@ -49,12 +58,19 @@ const groupForm = {
     },
     clear: function () {
         this.container.innerText = '';
+    },
+    show: function () {
+        this.container.classList.add('active');
+    },
+    hide: function () {
+        this.container.classList.remove('active');
     }
 }
 
 const groupList = {
     list: document.getElementById('group-list'),
     render: function () {
+        groupForm.hide();
         todo._groups.forEach(group => {
             let groupListItem = makeGroupListItem(group);
             groupListItem.classList.add('group-list-item');
@@ -69,5 +85,17 @@ const groupList = {
     }
 }
 
+const buttons = {
+    newTaskBtnCont: document.getElementById('new-task-btn-cont'),
+    newGroupBtnCont: document.getElementById('new-group-btn-cont'),
+    render: function () {
+        this.newTaskBtnCont.appendChild(makeAddButton('add-new-task', 'Add Task'));
+        this.newGroupBtnCont.appendChild(makeAddButton('add-new-group', 'Add List'));
+    }
+    
+}
 
-export {taskList, taskForm, groupForm, groupList}
+
+
+
+export {taskList, taskForm, groupForm, groupList, buttons}

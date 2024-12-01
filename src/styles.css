@@ -2,8 +2,12 @@
     --delete-red: #c00;
     --edit-blue: #0492ba;
     --btn-primary-bg: #0082e1;
+    --btn-primary-bg-hover: #37a9fb;
     --btn-primary-text: #ffffff;
-    --sidebar-bg: #eaeaea;
+    --btn-secondary-bg-hover: #90d1ff;
+    --btn-secondary-text: #005089;
+    --sidebar-bg: #d8efff;
+    --sidebar-hightlight: #b1daf7;
     --main-bg: #ffffff;
 }
 
@@ -16,15 +20,49 @@ body {
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template: 1fr / 1fr 3fr;
+    grid-template: 1fr / 1fr 4fr;
 }
 
 #sidebar {
     background: var(--sidebar-bg);
     overflow: scroll;
+    border-right: 1px solid #cdcdcd;
 }
 
-#add-task-form {
+#all-tasks {
+    padding: 20px;
+    border-bottom: 1px solid #8ebfe1;
+    font-weight: 600;
+}
+
+#new-group-btn-cont {
+    padding: 0 20px;
+}
+
+#add-new-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--btn-secondary-text);
+    border: 1px solid #8ebfe1;
+    border-radius: 5px;
+    background: none;
+}
+
+#add-new-group svg {
+    pointer-events: none;
+}
+
+#add-new-group:hover {
+    background-color: var(--btn-secondary-bg-hover);
+}
+
+
+#add-task-form, #add-group-form {
     position: absolute;
     z-index: 9999;
     background: #05285ecf;
@@ -38,25 +76,25 @@ body {
     backdrop-filter: blur(4px);
 }
 
-#add-task-form.active {
+#add-task-form.active, #add-group-form.active {
     display: flex;
 }
 
-.add-task-form {
+.add-task-form, .add-group-form {
     padding: 20px;
     background: #fff;
     border-radius: 10px;
     filter: drop-shadow(1px 1px 3px #0007);
 }
 
-.add-task-form fieldset{
+.add-task-form fieldset, .add-group-form fieldset{
     border: none;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.add-task-form legend {
+.add-task-form legend, .add-group-form legend {
     font-size: 26px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -66,7 +104,7 @@ body {
     padding-bottom: 10px;
 }
 
-.add-task-form input {
+.add-task-form input, .add-group-form input {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #bcbcbc;
@@ -75,7 +113,7 @@ body {
 
 
 
-.add-task-form label {
+.add-task-form label, .add-group-form label {
     display: block;
     margin-bottom: 5px;
 }
@@ -147,7 +185,7 @@ label[for="input-task-priority"] input:checked + span:before {
 }
 
 
-.add-task-form button {
+.add-task-form button, .add-group-form button {
     cursor: pointer;
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
@@ -157,7 +195,7 @@ label[for="input-task-priority"] input:checked + span:before {
     font-size: 18px;
 }
 
-#add-task-close.close-btn {
+#add-task-close.close-btn, #add-group-close.close-btn {
     background: none;
     color: #777777;
     position: absolute;
@@ -165,7 +203,7 @@ label[for="input-task-priority"] input:checked + span:before {
     right: 5px;
 }
 
-#add-task-close.close-btn svg {
+#add-task-close.close-btn svg, #add-group-close.close-btn svg {
     width: 30px;
     height: 30px;
     pointer-events: none;
@@ -175,7 +213,8 @@ label[for="input-task-priority"] input:checked + span:before {
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    background: #efefef;
+    background: #ffffff;
+    border-bottom: 1px solid #dcdcdc;
 }
 
 #main-header h1 {
@@ -184,7 +223,7 @@ label[for="input-task-priority"] input:checked + span:before {
 
 #main-header #add-new-task {
     background: var(--btn-primary-bg);
-    padding: 10px 50px;
+    padding: 10px 30px;
     border: none;
     border-radius: 100px;
     color: var(--btn-primary-text);
@@ -192,9 +231,21 @@ label[for="input-task-priority"] input:checked + span:before {
     cursor: pointer;
 }
 
+#add-new-task svg {
+    margin-left: 13px;
+    pointer-events: none;
+}
+
 #main-title {
     display: flex;
     align-items: center;
+    padding-left: 15px;
+}
+
+#main-title svg {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
 }
 
 #main {
@@ -367,10 +418,20 @@ label[for="input-task-priority"] input:checked + span:before {
 }
 
 #group-list {
-    padding: 0;
+    padding: 10px;
     list-style: none;
+    margin: 10px 0;
+    
 }
 
 #group-list .active-group {
-    background-color: #bcbcbc;
+    background-color: #b1daf7;
+    border-radius: 4px;
+    color: var(--btn-secondary-text);
+}
+
+.group-list-item {
+    padding: 4px 10px;
+    cursor: pointer;
+    font-weight: 600;
 }

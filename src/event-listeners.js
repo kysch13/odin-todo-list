@@ -43,14 +43,12 @@ pageElements.sidebar.addEventListener('click', (e) => {
         taskList.clear();
         taskList.render();
         taskForm.clear();
-        taskForm.render();
     }
     if (elem.id === 'save-task-btn') {
         submitTaskEdit(Number(elem.dataset.taskId));
         taskList.clear();
         taskList.render();
         taskForm.clear();
-        taskForm.render();
     }
     if (elem.id === 'add-new-group-btn') {
         submitGroupForm();
@@ -59,7 +57,6 @@ pageElements.sidebar.addEventListener('click', (e) => {
         groupList.clear();
         groupList.render();
         groupForm.clear();
-        groupForm.render();
     }
     if (elem.classList.contains('group-list-item')) {
         todo.setActiveGroup(Number(elem.dataset.groupId));
@@ -77,12 +74,22 @@ pageElements.sidebar.addEventListener('click', (e) => {
     }
     if (elem.id === 'add-task-close' || elem.id === 'add-task-form') {
         taskForm.hide();
+        taskForm.clear();
+    }
+    if (elem.id === 'add-group-close' || elem.id === 'add-group-form') {
+        groupForm.hide();
+        groupForm.clear();
+    }
+    if (elem.id === 'add-new-group') {
+        groupForm.render();
+        groupForm.show();
     }
 });
 
 
 pageElements.mainHeader.addEventListener('click', (e) => {
     if (e.target.id === 'add-new-task'){
+        taskForm.render();
         taskForm.show();
     }
 });
