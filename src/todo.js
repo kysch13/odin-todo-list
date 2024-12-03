@@ -1,4 +1,5 @@
 import { idTracker } from "./id-tracker";
+import { dataHandler } from "./storage";
 
 const todo = {
     _groups: [],
@@ -8,6 +9,7 @@ const todo = {
         let idNum = idTracker.groupID();
         this._groups.push({idNum, title});
         this.setActiveGroup(idNum);
+        dataHandler.saveData('_groups', this._groups);
     },
     setActiveGroup: function (idNum) {
         this._activeGroup.idNum = idNum;
@@ -24,6 +26,7 @@ const todo = {
     addTask: function (title, complete, desc, due, priority, group) {
         let idNum = idTracker.taskID();
         this._tasks.push({idNum, title, complete, desc, due, priority, group});
+        dataHandler.saveData('_tasks', this._tasks);
     },
     deleteTask: function (idNum) {
         // find task with matching id and remove from list
@@ -58,6 +61,12 @@ const todo = {
                 this._tasks[i].complete = complete;
             }
         }
+    },
+    loadTasks: function () {
+        this._tasks = dataHandler.loadData('_tasks');
+    },
+    loadGroups: function () {
+        this._groups = dataHandler.loadData('_groups');
     }
 }
 
