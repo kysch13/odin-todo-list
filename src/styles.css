@@ -259,7 +259,7 @@ label[for="input-task-priority"] input:checked + span:before {
 }
 
 .task-container {
-    padding: 15px;
+    padding: 8px 10px 8px 25px;
     border-radius: 5px;
     display: grid;
     grid-template: 1fr / 40px 2fr 100px;
@@ -275,9 +275,19 @@ label[for="input-task-priority"] input:checked + span:before {
     color: #777;
 }
 
+.task-container.high-priority .task-status::before {
+    content: '!';
+    position: absolute;
+    left: -12px;
+    font-weight: 600;
+    color: #c00;
+    font-size: 22px;
+}
+
 .task-status {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .task-status label {

@@ -9,6 +9,9 @@ function makeTaskElem (task) {
     if (task.complete) {
         container.classList.add('task-completed');
     }
+    if (task.priority) {
+        container.classList.add('high-priority');
+    }
     const statusCont = makeElem('div', undefined, 'task-status');
     const taskDetails = makeElem('div', undefined, 'task-details');
     const taskUI = makeElem('div', undefined, 'task-ui');
