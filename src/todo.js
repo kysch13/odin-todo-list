@@ -7,6 +7,7 @@ const todo = {
     _tasks: [],
     addGroup: function (title) {
         let idNum = idTracker.groupID();
+        dataHandler.saveData('groupIDTrack', idTracker.groupID());
         this._groups.push({idNum, title});
         this.setActiveGroup(idNum);
         dataHandler.saveData('_groups', this._groups);
@@ -25,6 +26,7 @@ const todo = {
     },
     addTask: function (title, complete, desc, due, priority, group) {
         let idNum = idTracker.taskID();
+        dataHandler.saveData('taskIDTrack', idTracker.taskID());
         this._tasks.push({idNum, title, complete, desc, due, priority, group});
         dataHandler.saveData('_tasks', this._tasks);
     },
@@ -35,6 +37,7 @@ const todo = {
                 this._tasks.splice(i, 1);
             }
         }
+        dataHandler.saveData('_tasks', this._tasks);
     },
     updateTask: function (idNum, title, complete, desc, due, priority) {
         // find task with matching id and update key values
@@ -47,6 +50,7 @@ const todo = {
                 this._tasks[i].priority = priority;
             }
         }
+        dataHandler.saveData('_tasks', this._tasks);
     },
     retrieveTask: function (idNum) {
         for (let i=0; i<this._tasks.length; i++) {
@@ -55,12 +59,13 @@ const todo = {
             }
         }
     },
-    changeTaskStatus: function (idNum, complete) {
+    changeTaskStatus: function (idNum) {
         for (let i=0; i<this._tasks.length; i++) {
             if (this._tasks[i].idNum === idNum) {
-                this._tasks[i].complete = complete;
+                this._tasks[i].complete = !this._tasks[i].complete;
             }
         }
+        dataHandler.saveData('_tasks', this._tasks);
     },
     loadTasks: function () {
         this._tasks = dataHandler.loadData('_tasks');

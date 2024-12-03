@@ -1,6 +1,8 @@
+import { dataHandler } from "./storage";
+
 const idTracker = (function () {
-    let taskIDTrack = 1;
-    let groupIDTrack = 1;
+    let taskIDTrack = dataHandler.loadId('taskIDTrack');
+    let groupIDTrack = dataHandler.loadId('groupIDTrack');
     const taskID = function() {
         return taskIDTrack++;
     }

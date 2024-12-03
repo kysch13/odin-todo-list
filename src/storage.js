@@ -31,6 +31,14 @@ function storageAvailable(type) {
         } else {
             return [];
         }
+    },
+    loadId: function (key) {
+        if (this.storage.getItem(key)) {
+            const id = JSON.parse(this.storage.getItem(key));
+            return id;
+        } else {
+            return 1;
+        }
     }
  }
   

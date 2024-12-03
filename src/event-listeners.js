@@ -25,11 +25,7 @@ pageElements.main.addEventListener('click', (e) => {
     }
 
     if (elem.classList.contains('task-status-checkbox')){
-        if (elem.checked === true) {
-            todo.changeTaskStatus(Number(elem.dataset.taskId), true);
-        } else {
-            todo.changeTaskStatus(Number(elem.dataset.taskId), false);
-        }
+        todo.changeTaskStatus(Number(elem.dataset.taskId));
         taskList.clear();
         taskList.render();
     }
