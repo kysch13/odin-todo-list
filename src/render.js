@@ -45,6 +45,8 @@ const taskForm = {
     },
     show: function () {
         this.container.classList.add('active');
+        // set focus to first input of modal
+        this.container.querySelector('#input-task-title').focus();
     },
     hide: function () {
         this.container.classList.remove('active');
@@ -61,6 +63,8 @@ const groupForm = {
     },
     show: function () {
         this.container.classList.add('active');
+        // set focus to first input of modal
+        this.container.querySelector('#input-group-title').focus();
     },
     hide: function () {
         this.container.classList.remove('active');
