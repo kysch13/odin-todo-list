@@ -30,9 +30,10 @@ body {
 }
 
 #all-tasks {
-    padding: 20px;
+    padding: 10px 15px;
     border-bottom: 1px solid #8ebfe1;
     font-weight: 600;
+    margin: 10px;
 }
 
 #new-group-btn-cont {
@@ -436,7 +437,7 @@ label[for="input-task-priority"] input:checked + span:before {
     
 }
 
-#group-list .active-group {
+#group-list .active-group, #all-tasks.active-group {
     background-color: #b1daf7;
     border-radius: 4px;
     color: var(--btn-secondary-text);

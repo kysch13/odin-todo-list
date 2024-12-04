@@ -1,5 +1,5 @@
 import {todo} from "./todo.js";
-import {groupForm, groupList, taskList, taskForm} from "./render.js";
+import {groupForm, groupList, taskList, taskForm, allTasks} from "./render.js";
 import { submitGroupForm, submitTaskEdit, submitTaskForm} from "./forms.js";
 
 const pageElements = (function (){

@@ -73,6 +73,7 @@ const groupForm = {
 
 const groupList = {
     list: document.getElementById('group-list'),
+    allTasksBtn : document.getElementById('all-tasks'),
     render: function () {
         groupForm.hide();
         todo._groups.forEach(group => {
@@ -83,11 +84,17 @@ const groupList = {
             };
             this.list.appendChild(groupListItem);
         });
+        if (todo._activeGroup.idNum === 0) {
+            this.allTasksBtn.classList.add('active-group');
+        } else {
+            this.allTasksBtn.classList.remove('active-group');
+        }
     },
     clear: function () {
         this.list.innerText = '';
     }
 }
+
 
 const buttons = {
     newTaskBtnCont: document.getElementById('new-task-btn-cont'),
