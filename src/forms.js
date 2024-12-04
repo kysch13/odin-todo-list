@@ -1,6 +1,6 @@
 import { makeElem } from "./elements";
 import { todo } from "./todo";
-import { dates, formatSimpleDate } from "./dates";
+import { dates, formatSimpleDate, formatDueDate, dateColorClass } from "./dates";
 import { taskList, taskForm, groupList, groupForm } from "./render";
 import { icon } from '@fortawesome/fontawesome-svg-core'
 import { faSquarePen, faCircleXmark, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +8,7 @@ import { faSquarePen, faCircleXmark, faCheckCircle } from '@fortawesome/free-sol
 
 
 
-function buildTaskForm (action, id) {
+function buildTaskForm (action, idNum) {
     const form = makeElem('form', undefined, 'add-task-form');
     const fieldset = makeElem('fieldset', undefined);
     const legend = makeElem('legend', undefined);
@@ -48,13 +48,13 @@ function buildTaskForm (action, id) {
         submit.id = 'add-new-task-btn';
         inputs.push(submit);
         legend.innerText = 'Add a New Task';
-    } else if (action === 'edit' && (id)) {
+    } else if (action === 'edit' && (idNum)) {
         const submit = makeElem('button', 'Save Task', 'save-task-submit-btn');
         submit.type = 'button';
         submit.id = 'save-task-btn';
-        submit.dataset.taskId = id;
+        submit.dataset.taskId = idNum;
         inputs.push(submit);
-        const taskObj = todo.retrieveTask(id);
+        const taskObj = todo.retrieveTask(idNum);
         titleInput.value = taskObj.title;
         descInput.value = taskObj.desc;
         dueDateInput.value = formatSimpleDate(taskObj.due); 
@@ -69,10 +69,11 @@ function buildTaskForm (action, id) {
         fieldset.appendChild(el);
         el.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                submitTaskForm();
-                taskList.clear();
-                taskList.render();
-                taskForm.clear();
+                if (action === 'add') {
+                    submitTaskForm();
+                } else if (action === 'edit' && (idNum)) {
+                    submitTaskEdit(idNum);
+                }
             }
         })
     });
@@ -140,6 +141,29 @@ function buildGroupForm () {
     return form;
 }
 
+function buildTaskDetails (idNum) {
+    const taskObj = todo.retrieveTask(idNum);
+    const modalBox = makeElem('div', '', 'task-details-box');
+    const title = makeElem('span', taskObj.title, 'task-details-title');
+    const due = makeElem('span', formatDueDate(taskObj.due), 'task-details-due', dateColorClass(taskObj.due));
+    const desc = makeElem('span', taskObj.desc, 'task-details-desc');
+
+    const closeBtn = makeElem('button', '', 'close-btn');
+    closeBtn.type = 'button';
+    closeBtn.id = 'close-details';
+    // Add FontAwesome icons
+    const closeIcon = icon(faCircleXmark);
+    Array.from(closeIcon.node).map((n) => closeBtn.appendChild(n));
+
+    modalBox.appendChild(title);
+    modalBox.appendChild(due);
+    modalBox.appendChild(desc);
+    modalBox.appendChild(closeBtn);
+
+    return modalBox;
+
+}
+
 function makeLabel (labelFor, text) {
     const label = document.createElement('label');
     label.setAttribute('for', labelFor);
@@ -147,9 +171,9 @@ function makeLabel (labelFor, text) {
     return label;
 }
 
-function makeInput (type, id, name, value, required, ...classes) {
+function makeInput (type, idNum, name, value, required, ...classes) {
     const input = document.createElement('input');
-    input.id = id;
+    input.id = idNum;
     input.name = name;
     input.value = value;
     if (required) {
@@ -176,6 +200,9 @@ function submitTaskForm () {
     const dueDateObj = new Date(`${due}T00:00:00`);
     if (validateForm(title)) {
         todo.addTask(String(title), false, String(desc), dueDateObj, priority, todo._activeGroup.idNum);
+        taskList.clear();
+        taskList.render();
+        taskForm.clear();
     }
 }
 
@@ -186,8 +213,12 @@ function submitTaskEdit (idNum) {
     const priority = document.getElementById('input-task-priority').checked;
     // Convert date input to date object. Format it later on output.
     const dueDateObj = new Date(`${due}T00:00:00`);
+    const taskObj = todo.retrieveTask(idNum);
     if (validateForm(title)) {
-        todo.updateTask(idNum, String(title), false, String(desc), dueDateObj, priority);
+        todo.updateTask(idNum, String(title), taskObj.complete, String(desc), dueDateObj, priority);
+        taskList.clear();
+        taskList.render();
+        taskForm.clear();
     }
 }
 
@@ -205,4 +236,4 @@ function validateForm (title) {
 }
 
 
-export {buildTaskForm, submitTaskForm, submitTaskEdit, buildGroupForm, submitGroupForm};
+export {buildTaskForm, submitTaskForm, submitTaskEdit, buildGroupForm, submitGroupForm, buildTaskDetails};

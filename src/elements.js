@@ -1,5 +1,5 @@
 import { icon } from '@fortawesome/fontawesome-svg-core'
-import { faSquarePen, faSquareXmark, faCheckCircle, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePen, faCircleXmark, faCheckCircle, faCirclePlus, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import { formatDueDate, dateColorClass } from './dates';
 
 
@@ -63,16 +63,21 @@ function makeTaskActionsElem (id) {
     const actionsCont = makeElem('div', undefined, 'task-actions');
     const deleteBtn = makeElem('button', undefined, 'task-delete');
     const editBtn = makeElem('button', undefined, 'task-edit');
+    const detailsBtn = makeElem('button', undefined, 'task-details');
     
     // Add FontAwesome icons
+    const detailsIcon = icon(faCircleInfo);
+    Array.from(detailsIcon.node).map((n) => detailsBtn.appendChild(n));
     const editIcon = icon(faSquarePen);
     Array.from(editIcon.node).map((n) => editBtn.appendChild(n));
-    const deleteIcon = icon(faSquareXmark);
+    const deleteIcon = icon(faCircleXmark);
     Array.from(deleteIcon.node).map((n) => deleteBtn.appendChild(n));
     
     deleteBtn.setAttribute('data-task-id', id);
     editBtn.setAttribute('data-task-id', id);
+    detailsBtn.setAttribute('data-task-id', id);
     
+    actionsCont.appendChild(detailsBtn);
     actionsCont.appendChild(editBtn);
     actionsCont.appendChild(deleteBtn);
     

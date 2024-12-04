@@ -1,6 +1,6 @@
 import { todo } from "./todo";
 import { makeTaskElem, makeGroupListItem, makeGroupTitleElem, makeElem, makeAddButton } from "./elements";
-import { buildTaskForm, buildGroupForm } from "./forms";
+import { buildTaskForm, buildGroupForm, buildTaskDetails } from "./forms";
 import { icon } from '@fortawesome/fontawesome-svg-core';
 import { faInbox } from '@fortawesome/free-solid-svg-icons';
 
@@ -47,6 +47,22 @@ const taskForm = {
         this.container.classList.add('active');
         // set focus to first input of modal
         this.container.querySelector('#input-task-title').focus();
+    },
+    hide: function () {
+        this.container.classList.remove('active');
+    }
+}
+
+const taskDetails = {
+    container: document.getElementById('modals'),
+    render: function (idNum) {
+        this.container.appendChild(buildTaskDetails(idNum));
+    },
+    clear: function () {
+        this.container.innerText = '';
+    },
+    show: function () {
+        this.container.classList.add('active');
     },
     hide: function () {
         this.container.classList.remove('active');
@@ -109,4 +125,4 @@ const buttons = {
 
 
 
-export {taskList, taskForm, groupForm, groupList, buttons}
+export {taskList, taskForm, groupForm, groupList, buttons, taskDetails}

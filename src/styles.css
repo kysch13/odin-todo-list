@@ -1,6 +1,7 @@
 :root {
-    --delete-red: #c00;
-    --edit-blue: #0492ba;
+    --action-delete: #c00;
+    --action-edit: #0082e1;
+    --action-details: #ff8f00;
     --btn-primary-bg: #0082e1;
     --btn-primary-bg-hover: #37a9fb;
     --btn-primary-text: #ffffff;
@@ -26,18 +27,20 @@ body {
 #sidebar {
     background: var(--sidebar-bg);
     overflow: scroll;
-    border-right: 1px solid #cdcdcd;
+    border-right: 1px solid #8ebfe1;
 }
 
 #all-tasks {
     padding: 10px 15px;
-    border-bottom: 1px solid #8ebfe1;
     font-weight: 600;
     margin: 10px;
+    cursor: pointer;
 }
 
 #new-group-btn-cont {
     padding: 0 20px;
+    border-top: 1px solid #8ebfe1;
+
 }
 
 #add-new-group {
@@ -65,7 +68,7 @@ body {
 }
 
 
-#add-task-form, #add-group-form {
+#add-task-form, #add-group-form, #modals {
     position: absolute;
     z-index: 9999;
     background: #05285ecf;
@@ -79,15 +82,33 @@ body {
     backdrop-filter: blur(4px);
 }
 
-#add-task-form.active, #add-group-form.active {
+#add-task-form.active, #add-group-form.active, #modals.active {
     display: flex;
 }
 
-.add-task-form, .add-group-form {
+.add-task-form, .add-group-form, .task-details-box {
     padding: 20px;
     background: #fff;
     border-radius: 10px;
     filter: drop-shadow(1px 1px 3px #0007);
+}
+
+.task-details-box {
+    display: flex;
+    flex-direction: column;
+    width: clamp(200px, 500px, 95vw);
+
+}
+
+.task-details-title {
+    font-size: 20px;
+    display: block;
+    padding-right: 30px;
+    font-weight: 600;
+}
+
+.task-details-due {
+    margin-bottom: 20px;
 }
 
 .add-task-form fieldset, .add-group-form fieldset{
@@ -198,15 +219,17 @@ label[for="input-task-priority"] input:checked + span:before {
     font-size: 18px;
 }
 
-#add-task-close.close-btn, #add-group-close.close-btn {
+#add-task-close.close-btn, #add-group-close.close-btn, #close-details.close-btn {
     background: none;
+    border: none;
     color: #777777;
     position: absolute;
     top: 10px;
     right: 5px;
+    cursor: pointer;
 }
 
-#add-task-close.close-btn svg, #add-group-close.close-btn svg {
+#add-task-close.close-btn svg, #add-group-close.close-btn svg, #close-details.close-btn svg {
     width: 30px;
     height: 30px;
     pointer-events: none;
@@ -335,7 +358,7 @@ label[for="input-task-priority"] input:checked + span:before {
 .task-details {
     display: flex;
     flex-direction: column;
-
+    
 }
 
 .task-container h2 {
@@ -361,7 +384,9 @@ label[for="input-task-priority"] input:checked + span:before {
 }
 
 .task-container:hover .task-actions {
-    display: block;
+    display: flex;
+    gap: 5px;
+    margin-right: 30px;
 }
 
 
@@ -383,11 +408,15 @@ label[for="input-task-priority"] input:checked + span:before {
 }
 
 .task-actions .task-delete {
-    color: var(--delete-red);
+    color: var(--action-delete);
 }
 
 .task-actions .task-edit {
-    color: var(--edit-blue);
+    color: var(--action-edit);
+}
+
+.task-actions .task-details {
+    color: var(--action-details);
 }
 
 .task-priority {
@@ -447,4 +476,8 @@ label[for="input-task-priority"] input:checked + span:before {
     padding: 4px 10px;
     cursor: pointer;
     font-weight: 600;
+}
+
+.group-list-item:hover:not(.active-group) {
+    background-color: #c6e7ff;
 }

@@ -1,5 +1,5 @@
 import {todo} from "./todo.js";
-import {groupForm, groupList, taskList, taskForm, allTasks} from "./render.js";
+import {groupForm, groupList, taskList, taskForm, taskDetails} from "./render.js";
 import { submitGroupForm, submitTaskEdit, submitTaskForm} from "./forms.js";
 
 const pageElements = (function (){
@@ -7,7 +7,8 @@ const pageElements = (function (){
     const mainHeader = document.getElementById('main-header');
     const sidebar = document.getElementById('sidebar');
     const formCont = document.getElementById('add-task-form');
-    return {main, mainHeader, sidebar, formCont};
+    const modals = document.getElementById('modals');
+    return {main, mainHeader, sidebar, formCont, modals};
 })();
 
 pageElements.main.addEventListener('click', (e) => {
@@ -24,6 +25,12 @@ pageElements.main.addEventListener('click', (e) => {
         taskForm.show();
     }
 
+    if (elem.classList.contains('task-details')){
+        taskDetails.clear();
+        taskDetails.render(Number(elem.dataset.taskId));
+        taskDetails.show();
+    }
+
     if (elem.classList.contains('task-status-checkbox')){
         todo.changeTaskStatus(Number(elem.dataset.taskId));
         taskList.clear();
@@ -36,15 +43,9 @@ pageElements.sidebar.addEventListener('click', (e) => {
     let elem = e.target;
     if (elem.id === 'add-new-task-btn') {
         submitTaskForm();
-        taskList.clear();
-        taskList.render();
-        taskForm.clear();
     }
     if (elem.id === 'save-task-btn') {
         submitTaskEdit(Number(elem.dataset.taskId));
-        taskList.clear();
-        taskList.render();
-        taskForm.clear();
     }
     if (elem.id === 'add-new-group-btn') {
         submitGroupForm();
@@ -89,3 +90,10 @@ pageElements.mainHeader.addEventListener('click', (e) => {
         taskForm.show();
     }
 });
+
+pageElements.modals.addEventListener('click', (e) => {
+    if (e.target.id === 'modals' || e.target.id === 'close-details') {
+        taskDetails.hide();
+        taskDetails.clear();
+    }
+})
