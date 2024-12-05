@@ -1,6 +1,6 @@
 import { todo } from "./todo";
 import { makeTaskElem, makeGroupListItem, makeGroupTitleElem, makeElem, makeAddButton } from "./elements";
-import { buildTaskForm, buildGroupForm, buildTaskDetails } from "./forms";
+import { buildTaskForm, buildGroupForm, buildTaskDetails, buildConfirmDelete } from "./forms";
 import { icon } from '@fortawesome/fontawesome-svg-core';
 import { faInbox } from '@fortawesome/free-solid-svg-icons';
 
@@ -111,6 +111,22 @@ const groupList = {
     }
 }
 
+const groupDelete = {
+    container: document.getElementById('modals'),
+    render: function (idNum) {
+        this.container.appendChild(buildConfirmDelete(idNum));
+    },
+    clear: function () {
+        this.container.innerText = '';
+    },
+    show: function () {
+        this.container.classList.add('active');
+    },
+    hide: function () {
+        this.container.classList.remove('active');
+    }    
+}
+
 
 const buttons = {
     newTaskBtnCont: document.getElementById('new-task-btn-cont'),
@@ -125,4 +141,4 @@ const buttons = {
 
 
 
-export {taskList, taskForm, groupForm, groupList, buttons, taskDetails}
+export {taskList, taskForm, groupForm, groupList, buttons, taskDetails, groupDelete}

@@ -1,5 +1,5 @@
 import { icon } from '@fortawesome/fontawesome-svg-core'
-import { faSquarePen, faCircleXmark, faCheckCircle, faCirclePlus, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePen, faCircleXmark, faCheckCircle, faCirclePlus, faCircleInfo, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { formatDueDate, dateColorClass } from './dates';
 
 
@@ -59,7 +59,7 @@ function makeStatusCheckbox (id, complete) {
     return form;
 }
 
-function makeTaskActionsElem (id) {
+function makeTaskActionsElem (idNum) {
     const actionsCont = makeElem('div', undefined, 'task-actions');
     const deleteBtn = makeElem('button', undefined, 'task-delete');
     const editBtn = makeElem('button', undefined, 'task-edit');
@@ -73,9 +73,9 @@ function makeTaskActionsElem (id) {
     const deleteIcon = icon(faCircleXmark);
     Array.from(deleteIcon.node).map((n) => deleteBtn.appendChild(n));
     
-    deleteBtn.setAttribute('data-task-id', id);
-    editBtn.setAttribute('data-task-id', id);
-    detailsBtn.setAttribute('data-task-id', id);
+    deleteBtn.setAttribute('data-task-id', idNum);
+    editBtn.setAttribute('data-task-id', idNum);
+    detailsBtn.setAttribute('data-task-id', idNum);
     
     actionsCont.appendChild(detailsBtn);
     actionsCont.appendChild(editBtn);
@@ -97,7 +97,22 @@ function makeElem (type, text, ...classes) {
 function makeGroupListItem (group) {
     const li = makeElem('li', group.title);
     li.setAttribute('data-group-id', group.idNum);
+    const actions = makeGroupListActions(group.idNum);
+    li.appendChild(actions);
     return li;
+}
+
+function makeGroupListActions (idNum) {
+    const actionsCont = makeElem('div', undefined, 'group-actions');
+    const deleteBtn = makeElem('button', undefined, 'group-delete');
+       // Add FontAwesome icons
+    const deleteIcon = icon(faXmark);
+    Array.from(deleteIcon.node).map((n) => deleteBtn.appendChild(n));
+    
+    deleteBtn.setAttribute('data-group-id', idNum);
+    actionsCont.appendChild(deleteBtn);
+    
+    return actionsCont;
 }
 
 function makeGroupTitleElem (activeGroup) {

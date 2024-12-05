@@ -98,18 +98,50 @@ body {
     display: flex;
 }
 
-.add-task-form, .add-group-form, .task-details-box {
+.add-task-form, .add-group-form, .task-details-box, .confirm-delete-box {
     padding: 20px;
     background: #fff;
     border-radius: 10px;
     filter: drop-shadow(1px 1px 3px #0007);
 }
 
-.task-details-box {
+.task-details-box, .confirm-delete-box {
     display: flex;
     flex-direction: column;
     width: clamp(200px, 500px, 95vw);
 
+}
+
+.confirm-delete-box > span {
+    padding-right: 25px;
+}
+
+.group-delete-actions {
+    margin-top: 20px;
+}
+
+.group-delete-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.group-delete-actions button {
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.group-delete-actions .cancel-delete-btn {
+    border: 1px solid var(--btn-primary-bg);
+    color: var(--btn-secondary-text);
+    background-color: #ffffff;
+}
+
+.group-delete-actions .confirm-delete-btn {
+    border: 1px solid var(--action-delete);
+    color: #ffffff;
+    background-color: var(--action-delete);
 }
 
 .task-details-title {
@@ -494,7 +526,32 @@ label[for="input-task-priority"] input:checked + span:before {
     padding: 4px 10px;
     cursor: pointer;
     font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.group-list-item .group-actions {
+    display: none;
+}
+
+.group-list-item:hover .group-actions {
+    display: block;
+}
+
+.group-list-item .group-actions button {
+    background: none;
+    border: none;
+    color: var(--btn-secondary-text);
+    cursor: pointer;
+}
+
+.group-list-item .group-actions button svg {
+    pointer-events: none;
+}
+
+
+
 
 .group-list-item:hover:not(.active-group) {
     background-color: #c6e7ff;

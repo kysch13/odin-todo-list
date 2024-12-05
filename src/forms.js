@@ -164,6 +164,31 @@ function buildTaskDetails (idNum) {
 
 }
 
+function buildConfirmDelete (idNum) {
+    const groupName = todo.retrieveGroup(idNum);
+    const modalBox = makeElem('div', '', 'confirm-delete-box');
+    const message = makeElem('span', `Are you sure you'd like to delete the group ${groupName.title}? This group and all associated tasks will be permanently deleted.`);
+    const deleteBtn = makeElem('button', 'Delete', 'confirm-delete-btn');
+    deleteBtn.dataset.groupId = idNum;
+    deleteBtn.id = 'delete-group';
+    const cancelBtn = makeElem('button', 'Cancel', 'cancel-delete-btn');
+    cancelBtn.id = 'cancel-group-delete';
+    const actions = makeElem('div', '', 'group-delete-actions');
+    actions.appendChild(cancelBtn);
+    actions.appendChild(deleteBtn);
+    const closeBtn = makeElem('button', '', 'close-btn');
+    closeBtn.type = 'button';
+    closeBtn.id = 'close-details';
+    // Add FontAwesome icons
+    const closeIcon = icon(faCircleXmark);
+    Array.from(closeIcon.node).map((n) => closeBtn.appendChild(n));
+    modalBox.appendChild(message);
+    modalBox.appendChild(actions);
+    modalBox.appendChild(closeBtn);
+
+    return modalBox;
+}
+
 function makeLabel (labelFor, text) {
     const label = document.createElement('label');
     label.setAttribute('for', labelFor);
@@ -236,4 +261,4 @@ function validateForm (title) {
 }
 
 
-export {buildTaskForm, submitTaskForm, submitTaskEdit, buildGroupForm, submitGroupForm, buildTaskDetails};
+export {buildTaskForm, submitTaskForm, submitTaskEdit, buildGroupForm, submitGroupForm, buildTaskDetails, buildConfirmDelete};

@@ -24,6 +24,37 @@ const todo = {
             this._activeGroup.title = 'All Tasks';
         }
     },
+    retrieveGroup: function (idNum) {
+        for (let i=0; i<this._groups.length; i++) {
+            if (this._groups[i].idNum === idNum) {
+                return this._groups[i];
+            }
+        }
+    },
+    deleteGroup: function (idNum) {
+        // find group with matching id and remove from list
+        for (let i=0; i<this._groups.length; i++) {
+            if (this._groups[i].idNum === idNum) {
+                this._groups.splice(i, 1);
+            }
+        }
+        // find tasks belonging to group and delete
+        const groupTasksToDelete = [];
+        for (let i=0; i<this._tasks.length; i++) {
+            if (this._tasks[i].group === idNum) {
+                groupTasksToDelete.push(this._tasks[i].idNum);
+            }
+        }
+        groupTasksToDelete.forEach((task) => {
+            this.deleteTask(task);
+        })
+        // reset active group if it's the one being deleted
+        if (this._activeGroup.idNum === idNum) {
+            this.setActiveGroup(0);
+        }
+        dataHandler.saveData('_groups', this._groups);
+        dataHandler.saveData('_tasks', this._tasks);
+    },
     addTask: function (title, complete, desc, due, priority, group) {
         let idNum = idTracker.taskID();
         dataHandler.saveData('taskIDTrack', idTracker.taskID());
