@@ -17,6 +17,10 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+h1 {
+    margin-bottom: 0;
+}
+
 .logo {
     padding: 10px 20px;
 }
@@ -40,7 +44,11 @@ body {
     background: var(--sidebar-bg);
     overflow: scroll;
     border-right: 1px solid #8ebfe1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 #all-tasks {
     padding: 10px 15px;
