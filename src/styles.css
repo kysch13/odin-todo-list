@@ -17,6 +17,18 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.logo {
+    padding: 10px 20px;
+}
+
+.logo svg {
+    max-width: 100%;
+}
+
+#github {
+    padding: 15px;
+}
+
 #page-container {
     height: 100vh;
     width: 100vw;
@@ -64,7 +76,7 @@ body {
 }
 
 #add-new-group:hover {
-    background-color: var(--btn-secondary-bg-hover);
+    background-color: #ffffff;
 }
 
 
@@ -233,6 +245,12 @@ label[for="input-task-priority"] input:checked + span:before {
     width: 30px;
     height: 30px;
     pointer-events: none;
+}
+
+#main-cont {
+    display: grid;
+    grid-template: 80px 1fr / 1fr;
+    height: 100vh;
 }
 
 #main-header {
